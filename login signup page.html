@@ -1,1 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login and Signup Page</title>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 20px;
+        background-color: #eef2f3;
+    }
+    .container {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #000;
+        border-radius: 10px;
+        background: #fff;
+    }
+    input {
+        display: block;
+        margin-bottom: 15px;
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    button:hover {
+        background: #0056b3;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+    <h1 style="text-align:center;">Login / Signup</h1>
+
+    <div class="container">
+        <h2>Signup</h2>
+        <input id="signupusername" placeholder="Username">
+        <input id="signuppassword" type="password" placeholder="Password">
+        <button id="signupbtn">Signup</button>
+    </div>
+
+    <div class="container">
+        <h2>Login</h2>
+        <input id="loginusername" placeholder="Username">
+        <input id="loginpassword" type="password" placeholder="Password">
+        <button id="loginbtn">Login</button>
+    </div>
+
+<script>
+    // Signup functionality
+    document.getElementById('signupbtn').addEventListener('click', () => {
+        const username = document.getElementById('signupusername').value.trim();
+        const password = document.getElementById('signuppassword').value.trim();
+
+        if (username && password) {
+            if (localStorage.getItem(username)) {
+                alert("User already exists. Try a different username.");
+            } else {
+                localStorage.setItem(username, password);
+                alert("Signup successful!");
+                document.getElementById('signupusername').value = '';
+                document.getElementById('signuppassword').value = '';
+            }
+        } else {
+            alert("Please fill in all signup fields.");
+        }
+    });
+
+    // Login functionality
+    document.getElementById('loginbtn').addEventListener('click', () => {
+        const username = document.getElementById('loginusername').value.trim();
+        const password = document.getElementById('loginpassword').value.trim();
+
+        if (username && password) {
+            const storedPassword = localStorage.getItem(username);
+            if (storedPassword && storedPassword === password) {
+                alert("Login successful!");
+                document.getElementById('loginusername').value = '';
+                document.getElementById('loginpassword').value = '';
+            } else {
+                alert("Invalid username or password.");
+            }
+        } else {
+            alert("Please fill in all login fields.");
+        }
+    });
+</script>
+
+</body>
+</html>
 
